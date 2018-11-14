@@ -10,6 +10,10 @@ const posts = require("./routes/api/posts");
 //creating app
 const app = express();
 
+//body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 //db config
 const db = require("./config/keys").mongoURI;
 
@@ -18,6 +22,12 @@ mongoose
   .connect(db)
   .then(() => console.log("Mongodb connected"))
   .catch(err => console.log("DB connection error"));
+
+//passport middleware
+app.use(passport.initialize());
+
+//passport config
+require("./config/passport")(passport);
 
 //configuring routes
 app.use("/api/users", users);
