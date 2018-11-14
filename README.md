@@ -20,10 +20,11 @@
 
     Note: run "npm i -D nodemon" to add it as dev dependency.
 
-#Server config
-  
- The start point for the server is the server.js file in the project root folder. I have created two separate scripts for running it. 1. "npm run server" - For development purposes this script is driven by nodemon which wont require you to restart the server. 2. "npm start" - The usual one time server run script
+#SERVER config
 
-#License
+    The start point for the server is the server.js file in the project root folder. I have created 2 separate scripts for running it. 1. "npm run server" - For development purposes this script is driven by nodemon which wont require you to restart the server.
+    2. "npm start" - The usual one time server run script
+
+#LICENSE
 
     Choose the MIT license instead of the ISC when you are doing "npm init".
