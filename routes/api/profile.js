@@ -10,6 +10,9 @@ const Profile = require("../../models/Profile");
 //load user model
 const User = require("../../models/User");
 
+//load profile validation
+const validateProfileInput = require("../../validation/profile");
+
 //@route        GET  api/profile/test
 //@description  Tests profile route
 //@access       Public
@@ -24,6 +27,7 @@ router.get(
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
+      .populate("user", ["name", "avatar"])
       .then(profile => {
         if (!profile) {
           errors.noprofile = "There is no profile for this user";
@@ -35,6 +39,40 @@ router.get(
   }
 );
 
+//@route        POST  api/profile/handle/:handle
+//@description  get profile by handle
+//@access       public
+router.get("/handle/:handle", (req, res) => {
+  const errors = {};
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.noprofile = "No profile available for this user";
+        return res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+//@route        POST  api/profile/user/:user_id
+//@description  get profile by user id
+//@access       public
+router.get("/handle/:handle", (req, res) => {
+  const errors = {};
+  Profile.findOne({ handle: req.params.user_id })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.noprofile = "No profile available for this user";
+        return res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 //@route        POST  api/profile
 //@description  create user profile
 //@access       private
@@ -42,6 +80,12 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateProfileInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
     //get fields
     const profileFields = {};
     profileFields.user = req.user.id;
