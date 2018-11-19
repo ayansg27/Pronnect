@@ -13,7 +13,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
 //loading user model
-const User = require("../../models/Users");
+const User = require("../../models/User");
 
 //loading keys
 const keys = require("../../config/keys");
