@@ -25,8 +25,11 @@
     Backend node server     => port 5000
     Frontend react server   => port 3000
     The start point for the backend server is the server.js file in the project root folder. I have created 2 separate scripts for running it.
-    1. "npm run server" - For development purposes this script is driven by nodemon which wont require you to restart the server.
-    2. "npm start" - The usual one time server run script
+    1. "npm run server"         - To run backend node server using nodemon.
+    2. "npm start"              - The usual one time server run script.
+    3. "npm run dev"            - Runs backend node and frontend react server simultaneously using concurrently.
+    4. "npm run client"         - Runs frontend react server only.
+    5. "npm run client-install" - Installs frontend react app.
 
 # License
 
