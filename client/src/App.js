@@ -12,7 +12,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 //import stylesheet
 import "./App.css";
@@ -22,6 +22,12 @@ if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
+  const currentTime = Date.now() / 1000;
+  console.log("decoded exp: " + decoded.exp + " currentTime: " + currentTime);
+  if (decoded.exp < currentTime) {
+    store.dispatch(logoutUser());
+    window.location.href = "/login";
+  }
 }
 
 class App extends Component {
