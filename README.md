@@ -1,9 +1,10 @@
-# pronnect
+# Pronnect
 
-# Dependencies
+# Backend Dependencies
 
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "gravatar": "^1.6.0",
     "jsonwebtoken": "^8.3.0",
@@ -11,6 +12,20 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.9.0"
+
+    Note: To ease installation you can copy this set of dependencies to the package.json and simply run a "npm install".
+
+# Frontend Dependencies
+
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
 
     Note: To ease installation you can copy this set of dependencies to the package.json and simply run a "npm install".
 
