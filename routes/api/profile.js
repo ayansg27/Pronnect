@@ -179,7 +179,7 @@ router.post(
         description: req.body.description
       };
       //add to experience array
-      profile.unshift(newExp);
+      profile.experience.unshift(newExp);
       profile.save().then(profile => res.json(profile));
     });
   }
@@ -209,7 +209,7 @@ router.post(
         description: req.body.description
       };
       //add to experience array
-      profile.unshift(newEdu);
+      profile.education.unshift(newEdu);
       profile.save().then(profile => res.json(profile));
     });
   }
