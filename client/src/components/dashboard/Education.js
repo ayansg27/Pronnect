@@ -11,28 +11,36 @@ class Education extends Component {
   }
 
   render() {
-    const education = this.props.education.map(edu => (
-      <tr key={edu._id}>
-        <td className="size-30">{edu.school}</td>
-        <td className="size-30">{edu.degree}</td>
-        <td className="size-30">
-          <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
-          {edu.to === null ? (
-            " Now"
-          ) : (
-            <Moment format="YYYY/MM/DD">{edu.to}</Moment>
-          )}
-        </td>
-        <td className="size-10">
-          <button
-            onClick={this.onDeleteClick.bind(this, edu._id)}
-            className="btn btn-danger"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ));
+    const education =
+      this.props.education.length > 0 ? (
+        this.props.education.map(edu => (
+          <tr key={edu._id}>
+            <td className="size-30">{edu.school}</td>
+            <td className="size-30">{edu.degree}</td>
+            <td className="size-30">
+              <Moment format="YYYY/MM/DD">{edu.from}</Moment> -
+              {edu.to === null ? (
+                " Now"
+              ) : (
+                <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+              )}
+            </td>
+            <td className="size-10">
+              <button
+                onClick={this.onDeleteClick.bind(this, edu._id)}
+                className="btn btn-danger"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td>No Education Added</td>
+        </tr>
+      );
+
     return (
       <div>
         <h4 className="mb-4">Education</h4>
