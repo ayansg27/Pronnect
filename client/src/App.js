@@ -12,14 +12,16 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
-import { clearCurrentProfile } from "./actions/profileActions";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/add-experience/AddExperience";
 import AddEducation from "./components/add-education/AddEducation";
+
+//import actions
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import { clearCurrentProfile } from "./actions/profileActions";
 
 //import stylesheet
 import "./App.css";

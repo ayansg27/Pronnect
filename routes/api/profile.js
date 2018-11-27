@@ -180,7 +180,10 @@ router.post(
       };
       //add to experience array
       profile.experience.unshift(newExp);
-      profile.save().then(profile => res.json(profile));
+      profile
+        .save()
+        .then(profile => res.json(profile))
+        .catch(err => console.log(err));
     });
   }
 );
