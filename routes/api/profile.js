@@ -103,7 +103,6 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-
     //get fields
     const profileFields = {};
     profileFields.user = req.user.id;
@@ -130,8 +129,8 @@ router.post(
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {
         //update
-        Profile.findOneAndUpdate(
-          { user: req.user.id },
+        Profile.findByIdAndUpdate(
+          profile.id,
           { $set: profileFields },
           { new: true }
         )

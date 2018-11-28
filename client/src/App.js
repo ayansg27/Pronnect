@@ -18,6 +18,8 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/add-experience/AddExperience";
 import AddEducation from "./components/add-education/AddEducation";
+import Campus from "./components/collegewide/Campus";
+import Profile from "./components/profile/Profile";
 
 //import actions
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -79,6 +81,16 @@ class App extends Component {
                   exact
                   path="/add-education"
                   component={AddEducation}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute exact path="/profiles" component={Campus} />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/profile/:handle"
+                  component={Profile}
                 />
               </Switch>
             </div>
