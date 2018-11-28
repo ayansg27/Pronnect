@@ -20,6 +20,8 @@ import AddExperience from "./components/add-experience/AddExperience";
 import AddEducation from "./components/add-education/AddEducation";
 import Campus from "./components/collegewide/Campus";
 import Profile from "./components/profile/Profile";
+import NotFound from "./components/not-found/NotFound";
+import Posts from "./components/posts/Posts";
 
 //import actions
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -93,6 +95,10 @@ class App extends Component {
                   component={Profile}
                 />
               </Switch>
+              <Switch>
+                <PrivateRoute exact path="/feed" component={Posts} />
+              </Switch>
+              <Route exact path="/not-found" component={NotFound} />
             </div>
             <Footer />
           </div>

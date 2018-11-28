@@ -59,10 +59,11 @@ router.get("/:id", (req, res) => {
 //@route        DELETE  api/post/:id
 //@description  Delete post
 //@access       private
-router.get(
+router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    console.log("hitting delete api with : " + req.params.id);
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
@@ -71,7 +72,9 @@ router.get(
             res.status(401).json({ notauthorized: "User not authorized" });
           }
           //delete post
-          Post.remove().then(() => res.json({ success: true }));
+          Post.deleteOne({ _id: req.params.id }).then(() =>
+            res.json({ success: true })
+          );
         })
         .catch(err => res.status(404).json({ postnotfound: "No post found" }));
     });
