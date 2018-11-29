@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const mongoose = require("mongoose");
+const ObjectId = require("mongoose");
 const passport = require("passport");
 
 //load post model
@@ -95,6 +95,7 @@ router.post(
             post.likes.filter(like => like.user.toString() === req.user.id)
               .length > 0
           ) {
+            console.log("Already like");
             return res
               .status(400)
               .json({ alreadyliked: "user already liked this post" });
@@ -103,7 +104,7 @@ router.post(
           post.likes.unshift({ user: req.user.id });
           post.save().then(post => res.json(post));
         })
-        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+        .catch(err => res.status(404).json(err));
     });
   }
 );

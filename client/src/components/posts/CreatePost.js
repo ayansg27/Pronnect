@@ -47,7 +47,9 @@ class CreatePost extends Component {
     return (
       <div className="post-form mb-3">
         <div className="card card-info">
-          <div className="card-header bg-info text-white">Say Somthing...</div>
+          <div className="card-header bg-info text-white">
+            Share anything you want...
+          </div>
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
@@ -60,7 +62,7 @@ class CreatePost extends Component {
                 />
               </div>
               <button type="submit" className="btn btn-info">
-                Submit
+                Post
               </button>
             </form>
           </div>
