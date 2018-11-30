@@ -63,7 +63,6 @@ router.delete(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("hitting delete api with : " + req.params.id);
     Profile.findOne({ user: req.user.id }).then(profile => {
       Post.findById(req.params.id)
         .then(post => {
@@ -155,7 +154,7 @@ router.post(
       }
       const newComment = {
         text: req.body.text,
-        name: req.bpdy.name,
+        name: req.body.name,
         avatar: req.body.avatar,
         user: req.user.id
       };
@@ -178,7 +177,7 @@ router.delete(
     Post.findById(req.params.id)
       .then(post => {
         if (
-          post.comment.filter(
+          post.comments.filter(
             comment => comment._id.toString() === req.params.comment_id
           ).length === 0
         ) {

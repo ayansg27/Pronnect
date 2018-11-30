@@ -19,8 +19,11 @@
 
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.22.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-moment": "^0.8.4",
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
@@ -43,8 +46,8 @@
     1. "npm run server"         - To run backend node server using nodemon.
     2. "npm start"              - The usual one time server run script.
     3. "npm run dev"            - Runs backend node and frontend react server simultaneously using concurrently.
-    4. "npm run client"         - Runs frontend react server only.
-    5. "npm run client-install" - Installs frontend react app.
+    4. "npm run pronect"         - Runs frontend react server only.
+    5. "npm run pronect-install" - Installs frontend react app.
 
 # License
 
