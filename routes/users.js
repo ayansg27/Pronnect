@@ -7,16 +7,16 @@ const passport = require("passport");
 const router = express.Router();
 
 //load registration validation
-const validateRegisterInput = require("../../validation/register");
+const validateRegisterInput = require("../validation/register");
 
 //load login validation
-const validateLoginInput = require("../../validation/login");
+const validateLoginInput = require("../validation/login");
 
 //loading user model
-const User = require("../../models/User");
+const User = require("../models/User");
 
 //loading keys
-const keys = require("../../config/keys");
+const keys = require("../config/keys");
 
 //@route        GET api/users/register
 //@description  tests users routes

@@ -5,13 +5,13 @@ const ObjectId = require("mongoose");
 const passport = require("passport");
 
 //load post model
-const Post = require("../../models/Post");
+const Post = require("../models/Post");
 
 //load profile model
-const Profile = require("../../models/Profile");
+const Profile = require("../models/Profile");
 
 //load post validation
-const validatePostInput = require("../../validation/post");
+const validatePostInput = require("../validation/post");
 
 //@route        POST  api/posts
 //@description  Create post

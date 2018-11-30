@@ -5,19 +5,19 @@ const passport = require("passport");
 const router = express.Router();
 
 //load profile model
-const Profile = require("../../models/Profile");
+const Profile = require("../models/Profile");
 
 //load user model
-const User = require("../../models/User");
+const User = require("../models/User");
 
 //load profile validation
-const validateProfileInput = require("../../validation/profile");
+const validateProfileInput = require("../validation/profile");
 
 //load experience validation
-const validateExperienceInput = require("../../validation/experience");
+const validateExperienceInput = require("../validation/experience");
 
 //load experience validation
-const validateEducationInput = require("../../validation/education");
+const validateEducationInput = require("../validation/education");
 
 //@route        GET  api/profile
 //@description  gets current user profile

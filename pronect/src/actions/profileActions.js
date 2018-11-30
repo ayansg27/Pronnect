@@ -12,7 +12,7 @@ import {
 export const getCurrentProfile = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("/api/profile")
+    .get("/profile")
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -31,7 +31,7 @@ export const getCurrentProfile = () => dispatch => {
 //create profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
-    .post("/api/profile", profileData)
+    .post("/profile", profileData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
@@ -44,7 +44,7 @@ export const createProfile = (profileData, history) => dispatch => {
 //add experience
 export const addExperience = (expData, history) => dispatch => {
   axios
-    .post("/api/profile/experience", expData)
+    .post("/profile/experience", expData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
@@ -57,7 +57,7 @@ export const addExperience = (expData, history) => dispatch => {
 //add education
 export const addEducation = (eduData, history) => dispatch => {
   axios
-    .post("/api/profile/education", eduData)
+    .post("/profile/education", eduData)
     .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
@@ -70,7 +70,7 @@ export const addEducation = (eduData, history) => dispatch => {
 //delete experience
 export const deleteExperience = id => dispatch => {
   axios
-    .delete(`/api/profile/experience/${id}`)
+    .delete(`/profile/experience/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -88,7 +88,7 @@ export const deleteExperience = id => dispatch => {
 //delete education
 export const deleteEducation = id => dispatch => {
   axios
-    .delete(`/api/profile/education/${id}`)
+    .delete(`/profile/education/${id}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -107,7 +107,7 @@ export const deleteEducation = id => dispatch => {
 export const getProfiles = () => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get("./api/profile/all")
+    .get("./profile/all")
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -126,7 +126,7 @@ export const getProfiles = () => dispatch => {
 export const getProfileByHandle = handle => dispatch => {
   dispatch(setProfileLoading());
   axios
-    .get(`/api/profile/handle/${handle}`)
+    .get(`/profile/handle/${handle}`)
     .then(res =>
       dispatch({
         type: GET_PROFILE,
@@ -146,7 +146,7 @@ export const getProfileByHandle = handle => dispatch => {
 export const deleteAccount = () => dispatch => {
   if (window.confirm("Are you sure you want to delete your account?")) {
     axios
-      .delete("/api/profile")
+      .delete("/profile")
       .then(res =>
         dispatch({
           type: SET_CURRENT_USER,

@@ -13,7 +13,7 @@ import {
 export const addPost = postData => dispatch => {
   dispatch(clearErrors());
   axios
-    .post("/api/posts", postData)
+    .post("/posts", postData)
     .then(res =>
       dispatch({
         type: ADD_POST,
@@ -32,7 +32,7 @@ export const addPost = postData => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get("/api/posts")
+    .get("/posts")
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -51,7 +51,7 @@ export const getPosts = () => dispatch => {
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get(`/api/posts/${id}`)
+    .get(`/posts/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -69,7 +69,7 @@ export const getPost = id => dispatch => {
 //delete post
 export const deletePost = id => dispatch => {
   axios
-    .delete(`/api/posts/${id}`)
+    .delete(`/posts/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_POST,
@@ -87,7 +87,7 @@ export const deletePost = id => dispatch => {
 //add like
 export const addLike = id => dispatch => {
   axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/posts/like/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -100,7 +100,7 @@ export const addLike = id => dispatch => {
 //remove like
 export const removeLike = id => dispatch => {
   axios
-    .post(`/api/posts/unlike/${id}`)
+    .post(`/posts/unlike/${id}`)
     .then(res => dispatch(getPosts()))
     .catch(err =>
       dispatch({
@@ -114,7 +114,7 @@ export const removeLike = id => dispatch => {
 export const addComment = (postId, commentData) => dispatch => {
   dispatch(clearErrors());
   axios
-    .post(`/api/posts/comment/${postId}`, commentData)
+    .post(`/posts/comment/${postId}`, commentData)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -132,7 +132,7 @@ export const addComment = (postId, commentData) => dispatch => {
 //Delete comment
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
-    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .delete(`/posts/comment/${postId}/${commentId}`)
     .then(res =>
       dispatch({
         type: GET_POST,
