@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const fileUpload = require("express-fileupload");
 
 const users = require("./routes/users");
 const profile = require("./routes/profile");
@@ -9,6 +10,14 @@ const posts = require("./routes/posts");
 
 //creating app
 const app = express();
+
+//setting up file upload
+//app.use(express.static(__dirname));
+app.use(fileUpload());
+
+//setting up static resource
+var publicDir = require("path").join(__dirname, "/public");
+app.use(express.static(publicDir));
 
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

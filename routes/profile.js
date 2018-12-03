@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const path = require("path");
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ const validateExperienceInput = require("../validation/experience");
 //load experience validation
 const validateEducationInput = require("../validation/education");
 
-//@route        GET  api/profile
+//@route        GET  /profile
 //@description  gets current user profile
 //@access       private
 router.get(
@@ -40,7 +41,7 @@ router.get(
   }
 );
 
-//@route        POST  api/profile/all
+//@route        POST  /profile/all
 //@description  get all profiles
 //@access       public
 router.get("/all", (req, res) => {
@@ -98,33 +99,61 @@ router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validateProfileInput(req.body);
+    //console.log(req.body.profileData);
+    const profileInput = JSON.parse(req.body.profileData);
+    //console.log(profileInput);
+    const { errors, isValid } = validateProfileInput(profileInput);
     //check validation
     if (!isValid) {
       return res.status(400).json(errors);
     }
     //get fields
     const profileFields = {};
+    //setting profile pic
+    if (req.files.file) {
+      let uploadFile = req.files.file;
+      const fileName = req.files.file.name;
+      let fileNameSplit = fileName.split(".");
+      let finalFileName =
+        fileNameSplit[0] + "-" + Date.now() + "." + fileNameSplit[1];
+      const fileDir = path.join(__dirname, "../");
+      uploadFile.mv(`${fileDir}/public/uploads/${finalFileName}`, function(
+        err
+      ) {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
+        profileFields.imgPath = `/uploads/${finalFileName}`;
+      });
+    }
+    //setting profile fields
     profileFields.user = req.user.id;
-    if (req.body.handle) profileFields.handle = req.body.handle;
-    if (req.body.company) profileFields.company = req.body.company;
-    if (req.body.website) profileFields.website = req.body.website;
-    if (req.body.location) profileFields.location = req.body.location;
-    if (req.body.bio) profileFields.bio = req.body.bio;
-    if (req.body.status) profileFields.status = req.body.status;
-    if (req.body.githubusername)
-      profileFields.githubusername = req.body.githubusername;
+
+    if (profileInput.handle) profileFields.handle = profileInput.handle;
+    if (profileInput.company) profileFields.company = profileInput.company;
+    if (profileInput.website) profileFields.website = profileInput.website;
+    if (profileInput.location) profileFields.location = profileInput.location;
+    if (profileInput.bio) profileFields.bio = profileInput.bio;
+    if (profileInput.status) profileFields.status = profileInput.status;
+    if (profileInput.githubusername)
+      profileFields.githubusername = profileInput.githubusername;
     //skills
-    if (typeof req.body.skills != "undefined") {
-      profileFields.skills = req.body.skills.split(",");
+    if (typeof profileInput.skills != "undefined") {
+      profileFields.skills = profileInput.skills.split(",");
     }
     //social
     profileFields.social = {};
-    if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-    if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-    if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-    if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-    if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
+    if (profileInput.youtube)
+      profileFields.social.youtube = profileInput.youtube;
+    if (profileInput.twitter)
+      profileFields.social.twitter = profileInput.twitter;
+    if (profileInput.facebook)
+      profileFields.social.facebook = profileInput.facebook;
+    if (profileInput.linkedin)
+      profileFields.social.linkedin = profileInput.linkedin;
+    if (profileInput.instagram)
+      profileFields.social.instagram = profileInput.instagram;
 
     Profile.findOne({ user: req.user.id }).then(profile => {
       if (profile) {

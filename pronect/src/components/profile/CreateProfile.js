@@ -12,6 +12,7 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedFile: null,
       displaySocialInputs: false,
       handle: "",
       company: "",
@@ -38,7 +39,14 @@ class CreateProfile extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-
+  onUpload(e) {
+    e.preventDefault();
+  }
+  handleSelectedFile(e) {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+  }
   onSubmit(e) {
     e.preventDefault();
 
@@ -58,7 +66,10 @@ class CreateProfile extends Component {
       instagram: this.state.instagram
     };
 
-    this.props.createProfile(profileData, this.props.history);
+    const data = new FormData();
+    data.append("file", this.state.selectedFile, this.state.selectedFile.name);
+    data.append("profileData", JSON.stringify(profileData));
+    this.props.createProfile(data, this.props.history);
   }
 
   onChange(e) {
@@ -140,18 +151,25 @@ class CreateProfile extends Component {
           <div className="row">
             <div className="col-md-8 m-auto">
               <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Let's get some information to make your profile stand out
-              </p>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form-group m-auto">
+                  <label htmlFor="profilePicture">Profile Picture</label>
+                  <input
+                    type="file"
+                    className="form-control-file mb-3"
+                    id="profilePicture"
+                    name="imgProfile"
+                    onChange={this.handleSelectedFile.bind(this)}
+                  />
+                </div>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
                   name="handle"
                   value={this.state.handle}
                   onChange={this.onChange}
                   error={errors.handle}
-                  info="A unique handle for your profile URL. Your full name, company name, nickname"
+                  info="A unique handle for your profile"
                 />
                 <SelectListGroup
                   placeholder="Status"
@@ -160,7 +178,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   options={options}
                   error={errors.status}
-                  info="Give us an idea of where you are at in your career"
+                  info="Your current career status"
                 />
                 <TextFieldGroup
                   placeholder="Company"
@@ -168,7 +186,7 @@ class CreateProfile extends Component {
                   value={this.state.company}
                   onChange={this.onChange}
                   error={errors.company}
-                  info="Could be your own company or one you work for"
+                  info="Organization you work for"
                 />
                 <TextFieldGroup
                   placeholder="Website"
@@ -176,7 +194,7 @@ class CreateProfile extends Component {
                   value={this.state.website}
                   onChange={this.onChange}
                   error={errors.website}
-                  info="Could be your own website or a company one"
+                  info="Your website"
                 />
                 <TextFieldGroup
                   placeholder="Location"
@@ -184,7 +202,7 @@ class CreateProfile extends Component {
                   value={this.state.location}
                   onChange={this.onChange}
                   error={errors.location}
-                  info="City or city & state suggested (eg. Boston, MA)"
+                  info="City& state suggested (eg. New York, NY)"
                 />
                 <TextFieldGroup
                   placeholder="* Skills"

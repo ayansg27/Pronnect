@@ -13,12 +13,13 @@ class Navbar extends Component {
   }
   render() {
     const { isAuthenticated, user } = this.props.auth;
+    const { profile } = this.props.profile;
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
           <Link className="nav-link" to="/profiles">
             {" "}
-            Campus
+            Collegewide
           </Link>
         </li>
         <li className="nav-item">
@@ -39,7 +40,7 @@ class Navbar extends Component {
           >
             <img
               className="rounded-circle"
-              src={user.avatar}
+              src={profile ? profile.imgPath : null}
               alt={user.name}
               style={{ width: "25px", marginRight: "5px" }}
               title="You must have a gravatar connected to your email to display an image"
@@ -93,7 +94,8 @@ Navbar.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(

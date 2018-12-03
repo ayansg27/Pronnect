@@ -13,6 +13,8 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedFile: null,
+      imgPath: "",
       displaySocialInputs: false,
       handle: "",
       company: "",
@@ -50,6 +52,7 @@ class CreateProfile extends Component {
       const skillsCSV = profile.skills.join(",");
 
       // If profile field doesnt exist, make empty string
+      profile.imgPath = !isEmpty(profile.imgPath) ? profile.imgPath : "";
       profile.company = !isEmpty(profile.company) ? profile.company : "";
       profile.website = !isEmpty(profile.website) ? profile.website : "";
       profile.location = !isEmpty(profile.location) ? profile.location : "";
@@ -76,6 +79,7 @@ class CreateProfile extends Component {
 
       // Set component fields state
       this.setState({
+        imgPath: profile.imgPath,
         handle: profile.handle,
         company: profile.company,
         website: profile.website,
@@ -92,7 +96,12 @@ class CreateProfile extends Component {
       });
     }
   }
-
+  handleSelectedFile(e) {
+    this.setState({
+      selectedFile: e.target.files[0]
+    });
+    console.log(this.state.selectedFile);
+  }
   onSubmit(e) {
     e.preventDefault();
 
@@ -111,8 +120,16 @@ class CreateProfile extends Component {
       youtube: this.state.youtube,
       instagram: this.state.instagram
     };
-
-    this.props.createProfile(profileData, this.props.history);
+    const data = new FormData();
+    if (this.state.selectedFile !== null) {
+      data.append(
+        "file",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
+    data.append("profileData", JSON.stringify(profileData));
+    this.props.createProfile(data, this.props.history);
   }
 
   onChange(e) {
@@ -182,7 +199,7 @@ class CreateProfile extends Component {
       { label: "Junior Developer", value: "Junior Developer" },
       { label: "Senior Developer", value: "Senior Developer" },
       { label: "Manager", value: "Manager" },
-      { label: "Student or Learning", value: "Student or Learning" },
+      { label: "Student", value: "Student" },
       { label: "Instructor or Teacher", value: "Instructor or Teacher" },
       { label: "Intern", value: "Intern" },
       { label: "Other", value: "Other" }
@@ -199,6 +216,16 @@ class CreateProfile extends Component {
               <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
+                <div className="form-group m-auto">
+                  <label htmlFor="profilePicture">Profile Picture</label>
+                  <input
+                    type="file"
+                    className="form-control-file mb-3"
+                    id="profilePicture"
+                    name="imgProfile"
+                    onChange={this.handleSelectedFile.bind(this)}
+                  />
+                </div>
                 <TextFieldGroup
                   placeholder="* Profile Handle"
                   name="handle"

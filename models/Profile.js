@@ -1,11 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+var fs = require("fs");
 
 //create profile schema
 const ProfileSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "users"
+  },
+  imgPath: {
+    type: String
   },
   handle: {
     type: String,
