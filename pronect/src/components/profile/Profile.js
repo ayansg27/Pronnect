@@ -31,13 +31,14 @@ class Profile extends Component {
           <div className="row">
             <div className="col-md-6">
               <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back to Campus
+                Collegewide
               </Link>
             </div>
             <div className="col-md-6" />
           </div>
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
+
           <ProfileDetails
             education={profile.education}
             experience={profile.experience}

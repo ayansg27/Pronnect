@@ -67,7 +67,13 @@ class CreateProfile extends Component {
     };
 
     const data = new FormData();
-    data.append("file", this.state.selectedFile, this.state.selectedFile.name);
+    if (this.state.selectedFile !== null) {
+      data.append(
+        "file",
+        this.state.selectedFile,
+        this.state.selectedFile.name
+      );
+    }
     data.append("profileData", JSON.stringify(profileData));
     this.props.createProfile(data, this.props.history);
   }

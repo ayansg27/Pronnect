@@ -38,13 +38,6 @@ class Navbar extends Component {
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-            <img
-              className="rounded-circle"
-              src={profile ? profile.imgPath : null}
-              alt={user.name}
-              style={{ width: "25px", marginRight: "5px" }}
-              title="You must have a gravatar connected to your email to display an image"
-            />{" "}
             Logout
           </a>
         </li>

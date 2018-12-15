@@ -110,7 +110,7 @@ router.post(
     //get fields
     const profileFields = {};
     //setting profile pic
-    if (req.files.file) {
+    if (req.files) {
       let uploadFile = req.files.file;
       const fileName = req.files.file.name;
       let fileNameSplit = fileName.split(".");

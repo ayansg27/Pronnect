@@ -42,7 +42,7 @@ class Dashboard extends Component {
         dashboardContent = (
           <div>
             <p className="lead text-muted">Welcome {user.name}</p>
-            <p>Please configure your pronnect profile</p>
+            <p>Please configure your Pronnect profile</p>
             <Link to="/create-profile" className="btn btn-lg btn-info">
               Create Profile
             </Link>
