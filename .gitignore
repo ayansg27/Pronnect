@@ -1,3 +1,3 @@
 /node_modules
-/pronect/node_modules
 package-lock.json
+/config/keys_dev.js
