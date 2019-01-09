@@ -8,7 +8,8 @@
     "server": "nodemon server.js",
     "pronect-install": "npm install --prefix pronect",
     "pronect": "npm start --prefix pronect",
-    "dev": "concurrently \"npm run server\" \"npm run pronect\""
+    "dev": "concurrently \"npm run server\" \"npm run pronect\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix pronect && npm run build --prefix pronect"
   },
   "author": "ayan sengupta",
   "license": "MIT",
